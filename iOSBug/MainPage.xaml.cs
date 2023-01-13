@@ -12,8 +12,8 @@ public partial class MainPage : ContentPage
 		this.BindingContext = viewModel;
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
+    private async void Privato_Tapped(object sender, TappedEventArgs e)
+    {
 		viewModel.ButtonClicked();
 	}
 }

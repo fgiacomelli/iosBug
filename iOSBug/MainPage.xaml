@@ -2,57 +2,256 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:local="clr-namespace:TriggerProblemiOSRelease"
     x:Class="TriggerProblemiOSRelease.MainPage">
 
+    <ContentPage.Resources>
 
+        <local:RegistrationBackgroundColorHeaderConverter x:Key="registrationBackgroundColorHeaderConverter" />
+
+    </ContentPage.Resources>
+    
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-            <Border
-                Margin="0,0,4,0"
-                Background="Orange"
-                HorizontalOptions="FillAndExpand"
-                StrokeThickness="1"
+            <!--#region Header-->
+
+            <Grid Margin="18,18,18,12">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Image
+                x:Name="backImage"
+                HeightRequest="40"
+                HorizontalOptions="Start"
+                Source="icona_back"
                 VerticalOptions="Center">
-                <Border.Triggers>
-                    <DataTrigger
-                        Binding="{Binding Enabled}"
-                        TargetType="Border"
-                        Value="True">
-                        <Setter Property="Background" Value="{StaticResource ButtonEnabledBackgroundColor}" />
-                        <Setter Property="Stroke" Value="White" />
-                    </DataTrigger>
-                    <DataTrigger
-                        Binding="{Binding Enabled}"
-                        TargetType="Border"
-                        Value="False">
-                        <Setter Property="Background" Value="White" />
-                        <Setter Property="Stroke" Value="Black" />
-                    </DataTrigger>
-                </Border.Triggers>
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10,10,10,10" />
-                </Border.StrokeShape>
+                </Image>
+
                 <Label
-                    Margin="0"
-                    Padding="10"
-                    VerticalTextAlignment="Center"
-                    HorizontalOptions="CenterAndExpand"
-                    HorizontalTextAlignment="End"
-                    TextColor="Black"
-                    Text="{Binding TextLabel}" />
-            </Border>
+                HorizontalOptions="CenterAndExpand"
+                Style="{StaticResource TextRegular16}"
+                Text="Header text"
+                VerticalOptions="Center" />
 
-            <Button
-                x:Name="CounterBtn"
-                Text="RaiseTrigger"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+                <Grid Grid.Row="1" Margin="0,16,0,0">
 
-        </VerticalStackLayout>
+                    <StackLayout Orientation="Horizontal">
+
+                        <Grid
+                        Margin="0,0,3,0"
+                        BackgroundColor="{StaticResource ButtonEnabledBackgroundColor}"
+                        HeightRequest="5"
+                        HorizontalOptions="FillAndExpand" />
+                        <Grid
+                        Grid.Column="1"
+                        Margin="3,0,3,0"
+                        BackgroundColor="{Binding ., Converter={StaticResource registrationBackgroundColorHeaderConverter}, ConverterParameter='2'}"
+                        HeightRequest="5"
+                        HorizontalOptions="FillAndExpand" />
+                        <Grid
+                        Grid.Column="2"
+                        Margin="3,0,3,0"
+                        BackgroundColor="{Binding ., Converter={StaticResource registrationBackgroundColorHeaderConverter}, ConverterParameter='3'}"
+                        HeightRequest="5"
+                        HorizontalOptions="FillAndExpand">
+                            <Grid.Triggers>
+                                <DataTrigger
+                                Binding="{Binding Enabled}"
+                                TargetType="Grid"
+                                Value="True">
+                                    <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                                </DataTrigger>
+                                <DataTrigger
+                                Binding="{Binding Enabled}"
+                                TargetType="Grid"
+                                Value="False">
+                                    <Setter Property="HorizontalOptions" Value="End" />
+                                </DataTrigger>
+                            </Grid.Triggers>
+                        </Grid>
+
+                    </StackLayout>
+
+                </Grid>
+
+                <Border
+                Grid.Row="2"
+                Margin="0,16,0,0"
+                Padding="8"
+                Stroke="{StaticResource BorderGroupButtonsColor}"
+                StrokeThickness="2">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+
+                    <Grid VerticalOptions="Center">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="33*" />
+                            <ColumnDefinition Width="33*" />
+                            <ColumnDefinition Width="33*" />
+                        </Grid.ColumnDefinitions>
+
+
+                        <Border
+                        x:Name="RegistrazionePrivatoButton"
+                        Margin="0,0,4,0"
+                        Background="{StaticResource ButtonEnabledBackgroundColor}"
+                        HorizontalOptions="FillAndExpand"
+                        StrokeThickness="1"
+                        VerticalOptions="Center">
+                            <Border.Triggers>
+                                <DataTrigger
+                                Binding="{Binding Enabled}"
+                                TargetType="Border"
+                                Value="True">
+                                    <Setter Property="Background" Value="#FFB700" />
+                                    <Setter Property="Stroke" Value="White" />
+                                </DataTrigger>
+                                <DataTrigger
+                                Binding="{Binding Enabled}"
+                                TargetType="Border"
+                                Value="False">
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="Stroke" Value="Black" />
+                                </DataTrigger>
+                            </Border.Triggers>
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10,10,10,10" />
+                            </Border.StrokeShape>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Privato_Tapped" />
+                            </Border.GestureRecognizers>
+                            <Label
+                            Margin="0"
+                            Padding="10"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="End"
+                            Style="{StaticResource TextRegular16}"
+                            Text="Privato" />
+                           
+                        </Border>
+
+                        <Border
+                        x:Name="RegistrazioneAziendaButton"
+                        Grid.Column="1"
+                        Margin="4,0,4,0"
+                        Background="White"
+                        HorizontalOptions="FillAndExpand"
+                        StrokeThickness="1"
+                        Stroke="Black"
+                        VerticalOptions="Center">
+                            <Border.Triggers>
+                                <DataTrigger
+                                Binding="{Binding Enabled}"
+                                TargetType="Border"
+                                Value="True">
+                                    <Setter Property="Background" Value="#FFB700" />
+                                    <Setter Property="Stroke" Value="White" />
+                                </DataTrigger>
+                                <DataTrigger
+                                Binding="{Binding Enabled}"
+                                TargetType="Border"
+                                Value="False">
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="Stroke" Value="Black" />
+                                </DataTrigger>
+                            </Border.Triggers>
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10,10,10,10" />
+                            </Border.StrokeShape>
+                            <Label
+                            Margin="0"
+                            Padding="10"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="End"
+                            Style="{StaticResource Enabled}"
+                            Text="Azienda" />
+                        </Border>
+
+
+                        <Border
+                        x:Name="RegistrazioneAltriUsiButton"
+                        Grid.Column="2"
+                        Margin="4,0,0,0"
+                        Background="White"
+                        Stroke="Black"
+                        HorizontalOptions="FillAndExpand"
+                        StrokeThickness="1"
+                        VerticalOptions="Center">
+                            <Border.Triggers>
+                                <DataTrigger
+                                Binding="{Binding Enabled}"
+                                TargetType="Border"
+                                Value="True">
+                                    <Setter Property="Background" Value="#FFB700" />
+                                    <Setter Property="Stroke" Value="White" />
+                                </DataTrigger>
+                                <DataTrigger
+                                Binding="{Binding Enabled}"
+                                TargetType="Border"
+                                Value="False">
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="Stroke" Value="Black" />
+                                </DataTrigger>
+                            </Border.Triggers>
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10,10,10,10" />
+                            </Border.StrokeShape>
+                            <Label
+                            Margin="0"
+                            Padding="10"
+                            VerticalTextAlignment="Center"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="End"
+                            Style="{StaticResource TextRegular16}"
+                            Text="Altri usi" />
+                        </Border>
+
+
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <!--#endregion-->
+
+            <!--#region Body-->
+
+            <!--<ScrollView x:Name="scrollViewBody" Grid.Row="1">
+
+                <Grid
+                BackgroundColor="{StaticResource LoginBackgroundColor}"
+                BindableLayout.ItemTemplateSelector="{StaticResource RegistrationTemplateSelector}"
+                BindableLayout.ItemsSource="{Binding RegistrationSteps}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+
+                    --><!--  Qui carichiamo dinamicamente la parte che rallenta la navigazione  --><!--
+
+                </Grid>
+            </ScrollView>-->
+
+            <!--#endregion-->
+
+            <!--#region Footer-->
+
+
+            <!--#endregion-->
+
+            </Grid>
     </ScrollView>
 
 </ContentPage>

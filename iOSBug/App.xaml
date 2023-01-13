@@ -10,9 +10,18 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Color x:Key="ButtonEnabledBackgroundColor">#FFB700</Color>
+            <Color x:Key="ButtonDisabledBackgroundColor">#E7E7E7</Color>
+            <Color x:Key="BorderGroupButtonsColor">#F6F6F6</Color>
+
+            <Style x:Key="TextRegular16" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+
         </ResourceDictionary>
 
-        <Color x:Key="ButtonEnabledBackgroundColor">#FFB700</Color>
 
     </Application.Resources>
 </Application>
